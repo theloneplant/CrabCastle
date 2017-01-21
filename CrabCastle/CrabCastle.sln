@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{6CBE4336-60EC-4191-6EE0-CA46A40B911C}") = "CrabCastle", "Assembly-CSharp.csproj", "{F981D84F-BB45-4178-1DED-A15AB419E907}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F981D84F-BB45-4178-1DED-A15AB419E907}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F981D84F-BB45-4178-1DED-A15AB419E907}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F981D84F-BB45-4178-1DED-A15AB419E907}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F981D84F-BB45-4178-1DED-A15AB419E907}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
