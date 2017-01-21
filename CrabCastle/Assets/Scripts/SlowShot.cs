@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shot : MonoBehaviour {
+public class SlowShot : MonoBehaviour {
 	public Transform target = null;
 	[SerializeField] private float speed = 10f;
 	[SerializeField] private float collisionDist = 0.25f;
-	[SerializeField] private float damage = 3.5f;
+	[SerializeField] private float slowMult = 0.25f;
+	[SerializeField] private float slowDuration = 2f;
 
 	// Update is called once per frame
 	void Update () {
@@ -16,8 +17,7 @@ public class Shot : MonoBehaviour {
 			Debug.Log (target.position);
 
 			if ((target.position - transform.position).magnitude <= collisionDist) {
-				FishManager fm = target.GetComponent<FishManager> ();
-				fm.health -= damage;
+				target.GetComponent<FishManager>().Slow(slowMult, slowDuration);
 				Destroy (this.gameObject);
 			}
 		}

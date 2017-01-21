@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class StandardShooter : MonoBehaviour {
+public class SlowShooter : MonoBehaviour {
 	[SerializeField] private GameObject shot;
 	[SerializeField] private GameObject turret;
 	[SerializeField] private Vector3 shotOffset;
@@ -30,40 +30,20 @@ public class StandardShooter : MonoBehaviour {
 	}
 
 	private void TargetFind() {
-		// Check if target is alive, then update distance and check if it's in range
-		if (currentTarget != null && currentTarget.GetComponent<FishManager>().isAlive()) {
-			distToTarget = (currentTarget.position - transform.position).magnitude;
-
-			if (distToTarget > range) { // Target out of range, reset target to null & reset dist
-				currentTarget = null;
-				distToTarget = float.PositiveInfinity;
-			}
-		}
-		else { // Target died, reset distance
+		// Only shoot the closest enemy
+		if (fishList.Length > 0) {
 			currentTarget = null;
 			distToTarget = float.PositiveInfinity;
-		}
-
-		// Determine new target if we don't have one
-		if (currentTarget == null && fishList.Length > 0) {
-			currentTarget = fishList[0];
 			foreach(Transform fish in fishList) {
 				if (fish != null) {
 					float dist = (fish.position - transform.position).magnitude;
-					if (distToTarget > dist && fish.GetComponent<FishManager>().isAlive()) {
+					FishManager fm = fish.GetComponent<FishManager>();
+					if (distToTarget > dist && fm.isAlive() && !fm.isSlowed()) {
 						currentTarget = fish;
 						distToTarget = dist;
 					}
 				}
 			}
-
-			// Couldn't find anything in range, don't shoot
-			if (distToTarget > range) {
-				currentTarget = null;
-				distToTarget = float.PositiveInfinity;
-			}
-			else
-				Debug.Log ("new target!!!");
 		}
 	}
 
@@ -93,7 +73,7 @@ public class StandardShooter : MonoBehaviour {
 			GameObject rotateObj = new GameObject ();
 			rotateObj.transform.position = turret.transform.position;
 			rotateObj.transform.LookAt (targetLoc);
-			turret.transform.rotation = Quaternion.RotateTowards (transform.rotation, rotateObj.transform.rotation, step);
+			turret.transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateObj.transform.rotation, step);
 			Destroy (rotateObj);
 		}
 		else {
