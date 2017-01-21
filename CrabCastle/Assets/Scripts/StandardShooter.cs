@@ -5,9 +5,11 @@ using UnityEngine;
 public class StandardShooter : MonoBehaviour {
 	[SerializeField] private GameObject fishWaveParent;
 	[SerializeField] private GameObject shot;
+	[SerializeField] private GameObject turret;
 	[SerializeField] private Vector3 shotOffset;
 	[SerializeField] private float range = 5f;
 	[SerializeField] private float shotInterval = 0.5f;
+	[SerializeField] private float spinRate = 1f;
 
 	private Transform[] fishList = null;
 	private Transform 	currentTarget = null;
@@ -19,11 +21,12 @@ public class StandardShooter : MonoBehaviour {
 		GetFishList();
 		timeFromLastShot = -shotInterval;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		TargetFind ();
 		HandleShoot ();
+		SpinTurret ();
 	}
 
 	private void TargetFind() {
@@ -68,6 +71,18 @@ public class StandardShooter : MonoBehaviour {
 			GameObject newShot = Instantiate(shot);
 			newShot.transform.position = transform.position + shotOffset;
 			newShot.GetComponent<Shot>().target = currentTarget;
+		}
+	}
+
+	private void SpinTurret() {
+		if (currentTarget != null) {
+			float step = spinRate * Time.deltaTime;
+			Vector3 targetLoc = currentTarget.position;
+			targetLoc.y = transform.position.y;
+			GameObject rotateObj = new GameObject ();
+			rotateObj.transform.position = turret.transform.position;
+			rotateObj.transform.LookAt (targetLoc);
+			turret.transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateObj.transform.rotation, step);
 		}
 	}
 
