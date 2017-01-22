@@ -1,13 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FishManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\scaleTower.cs">
     <Files>
-      <File FileName="Assets/Scripts/FishManager.cs" Line="66" Column="4" />
-      <File FileName="Assets/Scripts/StandardShooter.cs" Line="6" Column="47" />
-      <File FileName="Assets/Scripts/SlowShooter.cs" Line="6" Column="43" />
-      <File FileName="Assets/Scripts/Shot.cs" Line="14" Column="94" />
-      <File FileName="Assets/Scripts/SplashShot.cs" Line="7" Column="33" />
-      <File FileName="Assets/Scripts/SlowShot.cs" Line="22" Column="5" />
+      <File FileName="Assets\Scripts\fishSpawn.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\fishMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets\GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\TowerPlacement.cs" Line="69" Column="1" />
+      <File FileName="Assets\Scripts\waterLevel.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Shot.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\scaleTower.cs" Line="12" Column="55" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
