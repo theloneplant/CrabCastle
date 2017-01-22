@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class SplashShot : MonoBehaviour {
 	public Transform target = null;
+	[SerializeField] private GameObject hit;
 	[SerializeField] private float speed = 10f;
 	[SerializeField] private float collisionDist = 0.25f;
-	[SerializeField] private float splashRadius = 2f;
+	[SerializeField] private float splashRadius = 3.5f;
 	[SerializeField] private float damage = 1.5f;
 
 	private Transform[] fishList = null;
@@ -25,9 +26,12 @@ public class SplashShot : MonoBehaviour {
 					float dist = (fish.position - transform.position).magnitude;
 					if (dist < splashRadius) {
 						FishManager fm = fish.GetComponent<FishManager> ();
-						fm.health -= damage;
+						if (fm != null)
+							fm.health -= damage;
 					}
 				}
+				GameObject newHit = Instantiate (hit);
+				newHit.transform.position = target.transform.position;
 				Destroy (this.gameObject);
 			}
 		}

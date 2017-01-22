@@ -9,6 +9,8 @@ public class FishManager : MonoBehaviour
 	public float health = 10f;
 	public float speed = 10f;
 	public int loot = 5;
+	public float sinkDepth = -1f;
+	public float sinkDuration = 2f;
 
 	public GameObject nextWaypoint;
 	GameObject[] pathWaypoints;
@@ -16,6 +18,9 @@ public class FishManager : MonoBehaviour
 
 	public float currentSpeed = 10f;
 	private bool alive = true;
+	private float sinkStartTime;
+	private Vector3 sinkStartPos;
+	private Vector3 sinkEndPos;
 
 	private bool slowed = false;
 	private float slowMult = 1f;
@@ -50,13 +55,19 @@ public class FishManager : MonoBehaviour
 		{
 			currentSpeed = 0;
 			StartCoroutine(Die());
-			// Reward player with cash money
 		}
 
 		if (slowed && Time.time - startSlow >= slowDuration)
 		{
 			slowed = false;
 			currentSpeed = speed;
+			gameObject.GetComponentInChildren<ParticleSystem>().Stop();
+		}
+
+		if (!alive) {
+			float t = (Time.time - sinkStartTime) / sinkDuration;
+			gameObject.transform.position = Vector3.Lerp (sinkStartPos, sinkEndPos, t);
+			Debug.Log (sinkStartPos + " " + sinkEndPos + " " + sinkStartTime);
 		}
 	}
 
@@ -87,6 +98,7 @@ public class FishManager : MonoBehaviour
 		this.slowMult = slowMult;
 		this.slowDuration = slowDuration;
 		startSlow = Time.time;
+		gameObject.GetComponentInChildren<ParticleSystem>().Play();
 	}
 
 	public bool isSlowed() {
@@ -100,8 +112,16 @@ public class FishManager : MonoBehaviour
 
 	IEnumerator Die() 
 	{
-		alive = false;
-		yield return new WaitForSeconds (1);
-		Destroy (gameObject);
+		if (alive)
+		{
+			alive = false;
+			sinkStartTime = Time.time;
+			sinkStartPos = transform.position;
+			sinkEndPos = new Vector3 (sinkStartPos.x, sinkStartPos.y + sinkDepth, sinkStartPos.z);
+			PlayerManager pm = GameObject.FindGameObjectsWithTag("PlayerManager")[0].GetComponent<PlayerManager>();
+			pm.cashMoney += loot;
+			yield return new WaitForSeconds (2);
+			Destroy (gameObject);
+		}
 	}
 }

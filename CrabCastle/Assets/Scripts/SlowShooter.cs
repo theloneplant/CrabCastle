@@ -38,7 +38,7 @@ public class SlowShooter : MonoBehaviour {
 				if (fish != null) {
 					float dist = (fish.position - transform.position).magnitude;
 					FishManager fm = fish.GetComponent<FishManager>();
-					if (distToTarget > dist && fm.isAlive() && !fm.isSlowed()) {
+					if (fm != null && distToTarget > dist && fm.isAlive() && !fm.isSlowed()) {
 						currentTarget = fish;
 						distToTarget = dist;
 					}

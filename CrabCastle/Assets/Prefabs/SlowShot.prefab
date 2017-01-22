@@ -94,6 +94,7 @@ MonoBehaviour:
   speed: 10
   collisionDist: 0.25
   slowMult: 0.25
+  slowDuration: 2
 --- !u!135 &135000012002321078
 SphereCollider:
   m_ObjectHideFlags: 1

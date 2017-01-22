@@ -50,7 +50,8 @@ public class StandardShooter : MonoBehaviour {
 			foreach(Transform fish in fishList) {
 				if (fish != null) {
 					float dist = (fish.position - transform.position).magnitude;
-					if (distToTarget > dist && fish.GetComponent<FishManager>().isAlive()) {
+					FishManager fm = fish.GetComponent<FishManager>();
+					if (fm != null && distToTarget > dist && fm.isAlive()) {
 						currentTarget = fish;
 						distToTarget = dist;
 					}

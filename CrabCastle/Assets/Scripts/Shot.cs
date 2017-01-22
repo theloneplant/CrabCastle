@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Shot : MonoBehaviour {
 	public Transform target = null;
+	[SerializeField] private GameObject hit;
 	[SerializeField] private float speed = 10f;
 	[SerializeField] private float collisionDist = 0.25f;
 	[SerializeField] private float damage = 3.5f;
@@ -18,6 +19,8 @@ public class Shot : MonoBehaviour {
 			if ((target.position - transform.position).magnitude <= collisionDist) {
 				FishManager fm = target.GetComponent<FishManager> ();
 				fm.health -= damage;
+				GameObject newHit = Instantiate (hit);
+				newHit.transform.position = target.transform.position;
 				Destroy (this.gameObject);
 			}
 		}
