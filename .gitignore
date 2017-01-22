@@ -5,6 +5,7 @@
 [Oo]bj/
 [Bb]guild
 [Ll]ibrary/
+[Ll]ibrary/metadata/
 sysinfo.txt
 *.stackdump
 *.meta

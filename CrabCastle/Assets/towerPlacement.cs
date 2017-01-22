@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
 public class TowerPlacement : MonoBehaviour 
 {
 
 	public GameObject towerTransObj;
+	public GameObject buildAnimTowerPrefab;
 	public GameObject towerPrefab;
 
 	public Material notPlaceableMAT;
@@ -38,14 +40,31 @@ public class TowerPlacement : MonoBehaviour
 					Renderer towerRend = towerTransObj.GetComponent<Renderer> () as Renderer;
 					towerRend.sharedMaterial = placeableMAT;
 
-					if (Input.GetMouseButton (0)) 
+					if (Input.GetMouseButton (0) && scTowEvent != null) 
 					{
-						Instantiate (towerPrefab, towerTransObj.transform.position, towerTransObj.transform.rotation);
-						gManager.towerPlacementActive = false;
-						Destroy (towerTransObj);
+						BuildTower ();
 					}
+
+
 				}
 			}
 		}
 	}
+
+
+	void BuildTower()
+	{
+		Instantiate (towerPrefab, towerTransObj.transform.position, towerTransObj.transform.rotation);
+		GameObject animTower = Instantiate (buildAnimTowerPrefab, towerTransObj.transform.position, towerTransObj.transform.rotation) as GameObject;
+		ScaleTower (animTower);
+		gManager.towerPlacementActive = false;
+		foreach (Transform child in towerTransObj.transform) 
+		{
+			ParticleSystem pSystem = child.GetComponent<ParticleSystem> () as ParticleSystem;
+			pSystem.Play ();
+		}
+		//Destroy (towerTransObj);
+	}
+
+
 }

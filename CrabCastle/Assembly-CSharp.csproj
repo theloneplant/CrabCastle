@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\Waypoints.cs" />
      <Compile Include="Assets\Scripts\fishMovement.cs" />
      <Compile Include="Assets\Scripts\fishSpawn.cs" />
+     <Compile Include="Assets\Scripts\scaleTower.cs" />
      <Compile Include="Assets\Scripts\waterLevel.cs" />
      <Compile Include="Assets\Scripts\waterWakeMove.cs" />
      <Compile Include="Assets\TowerPlacement.cs" />
